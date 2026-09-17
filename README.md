@@ -5,6 +5,12 @@ Deep Reinforcement Learning for mobile robot navigation in ROS2 Gazebo. A robot 
 ### TD3 architecture
 ![TD3 architecture](https://miro.medium.com/1*b3l5KUz9X60QA8Iy95dBwA.png)
 
+### Environment details
+
+- **State (24-d):** 20 LiDAR sector distances (min range per angular bin, ~180° front arc) + distance-to-goal + heading-error-to-goal + last linear/angular velocity applied.
+- **Action (2-d):** linear velocity `[0, 1]` (forward only) and angular velocity `[-1, 1]`.
+- **Reward:** `+100` on reaching goal, `-100` on collision, otherwise `action[0]/2 - |action[1]|/2 - obstacle_proximity_penalty/2` rewards forward motion, penalizes sharp turns and getting close to obstacles.
+
 ### Usage
 
 **Train:**
